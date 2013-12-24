@@ -42,7 +42,9 @@ class WorkbenchDialog extends Modal
 
     # crafting + result div, upper
     crDiv = document.createElement('div')
-    crDiv.style.float = 'right'
+    crDiv.style.marginLeft = '30%'
+    #crDiv.style.marginLeft = 'auto' # TODO: fix centering
+    #crDiv.style.marginRight = 'auto'
     crDiv.style.marginBottom = '10px'
    
     craftCont = @craftIW.createContainer()

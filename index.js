@@ -74,7 +74,7 @@
       this.dialog.style.backgroundImage = 'linear-gradient(rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%)';
       document.body.appendChild(this.dialog);
       crDiv = document.createElement('div');
-      crDiv.style.float = 'right';
+      crDiv.style.marginLeft = '30%';
       crDiv.style.marginBottom = '10px';
       craftCont = this.craftIW.createContainer();
       resultCont = this.resultIW.createContainer();
