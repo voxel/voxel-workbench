@@ -1,0 +1,6 @@
+# voxel-workbench
+
+## License
+
+MIT
+
