@@ -22,7 +22,7 @@ class WorkbenchDialog extends Modal
       }
 
     # TODO: clear these inventories on close, or store in per-block metadata
-    @craftInventory = new Inventory(9)
+    @craftInventory = new Inventory(3, 3)
     @craftInventory.on 'changed', () => @updateCraftingRecipe()
     @craftIW = new InventoryWindow {width:3, inventory:@craftInventory, getTexture:@getTexture}
 

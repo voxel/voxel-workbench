@@ -46,7 +46,7 @@
         inventory: this.playerInventory,
         getTexture: this.getTexture
       });
-      this.craftInventory = new Inventory(9);
+      this.craftInventory = new Inventory(3, 3);
       this.craftInventory.on('changed', function() {
         return _this.updateCraftingRecipe();
       });
