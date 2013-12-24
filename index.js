@@ -90,6 +90,23 @@
       });
     }
 
+    WorkbenchDialog.prototype.updateCraftingRecipe = function() {
+      var recipe;
+      recipe = RecipeLocator.find(this.craftInventory);
+      console.log('found recipe', recipe);
+      return this.resultInventory.set(0, recipe != null ? recipe.computeOutput(this.craftInventory) : void 0);
+    };
+
+    WorkbenchDialog.prototype.tookCraftingOutput = function() {
+      var recipe;
+      recipe = RecipeLocator.find(this.craftInventory);
+      if (recipe == null) {
+        return;
+      }
+      recipe.craft(this.craftInventory);
+      return this.craftInventory.changed();
+    };
+
     return WorkbenchDialog;
 
   })(Modal);

@@ -21,6 +21,7 @@ class WorkbenchDialog extends Modal
       getTexture: @getTexture
       }
 
+    # TODO: clear these inventories on close, or store in per-block metadata
     @craftInventory = new Inventory(9)
     @craftInventory.on 'changed', () => @updateCraftingRecipe()
     @craftIW = new InventoryWindow {width:3, inventory:@craftInventory, getTexture:@getTexture}
@@ -62,6 +63,22 @@ class WorkbenchDialog extends Modal
     @dialog.appendChild(@playerIW.createContainer())
 
     super game, {element: @dialog}
+
+  # TODO: refactor again from voxel-inventory-dialog's crafting
+
+  # changed crafting grid, so update recipe output
+  updateCraftingRecipe: () ->
+    recipe = RecipeLocator.find(@craftInventory)
+    console.log 'found recipe',recipe
+    @resultInventory.set 0, recipe?.computeOutput(@craftInventory)
+
+  # picked up crafting recipe output, so consume crafting grid ingredients
+  tookCraftingOutput: () ->
+    recipe = RecipeLocator.find(@craftInventory)
+    return if not recipe?
+
+    recipe.craft(@craftInventory)
+    @craftInventory.changed()
 
 module.exports = (game, opts) ->
   return new WorkbenchDialog(game, opts)
