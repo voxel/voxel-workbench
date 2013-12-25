@@ -13,7 +13,7 @@ class WorkbenchDialog extends Modal
     # TODO: refactor with voxel-inventory-dialog
     @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
     @registry = opts.registry ? throw 'voxel-workbench requires "registry" set to voxel-registry instance'
-    @getTexture = opts.getTexture ? (itemPile) => @game.materials.texturePath + @registry.getItemProps(itemPile.item).itemTexture + '.png' # TODO: refactor?
+    @getTexture = opts.getTexture ? (itemPile) => @registry.getItemPileTexture(itemPile)
 
     @playerIW = new InventoryWindow {
       width: 10

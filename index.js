@@ -39,7 +39,7 @@
         }
       })();
       this.getTexture = (_ref3 = opts.getTexture) != null ? _ref3 : function(itemPile) {
-        return _this.game.materials.texturePath + _this.registry.getItemProps(itemPile.item).itemTexture + '.png';
+        return _this.registry.getItemPileTexture(itemPile);
       };
       this.playerIW = new InventoryWindow({
         width: 10,
