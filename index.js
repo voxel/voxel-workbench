@@ -18,7 +18,7 @@
     __extends(WorkbenchDialog, _super);
 
     function WorkbenchDialog(game, opts) {
-      var crDiv, craftCont, resultCont, _ref1,
+      var crDiv, craftCont, resultCont, _ref1, _ref2,
         _this = this;
       this.game = game;
       if (opts == null) {
@@ -31,6 +31,27 @@
           throw 'voxel-workbench requires "playerInventory" set to inventory instance';
         }
       })();
+      this.registry = (function() {
+        if ((_ref2 = opts.registry) != null) {
+          return _ref2;
+        } else {
+          throw 'voxel-workbench requires "registry" set to voxel-registry instance';
+        }
+      })();
+      if (opts.registerBlock == null) {
+        opts.registerBlock = true;
+      }
+      if (opts.registerRecipe == null) {
+        opts.registerRecipe = true;
+      }
+      if (opts.registerBlock) {
+        this.registry.registerBlock('workbench', {
+          texture: ['crafting_table_top', 'planks_oak', 'crafting_table_side']
+        });
+      }
+      if (opts.registerRecipe) {
+        this.registry.recipes.register(new AmorphousRecipe(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1)));
+      }
       this.playerIW = new InventoryWindow({
         width: 10,
         inventory: this.playerInventory
