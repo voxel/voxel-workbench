@@ -12,22 +12,19 @@ class WorkbenchDialog extends Modal
  
     # TODO: refactor with voxel-inventory-dialog
     @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
-    @registry = opts.registry ? throw 'voxel-workbench requires "registry" set to voxel-registry instance'
-    @getTexture = opts.getTexture ? (itemPile) => @registry.getItemPileTexture(itemPile)
 
     @playerIW = new InventoryWindow {
       width: 10
       inventory: @playerInventory
-      getTexture: @getTexture
       }
 
     # TODO: clear these inventories on close, or store in per-block metadata
     @craftInventory = new Inventory(3, 3)
     @craftInventory.on 'changed', () => @updateCraftingRecipe()
-    @craftIW = new InventoryWindow {width:3, inventory:@craftInventory, getTexture:@getTexture}
+    @craftIW = new InventoryWindow {width:3, inventory:@craftInventory}
 
     @resultInventory = new Inventory(1)
-    @resultIW = new InventoryWindow {inventory:@resultInventory, getTexture:@getTexture, allowDrop:false}
+    @resultIW = new InventoryWindow {inventory:@resultInventory, allowDrop:false}
     @resultIW.on 'pickup', () => @tookCraftingOutput()
 
     # the overall dialog

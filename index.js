@@ -18,7 +18,7 @@
     __extends(WorkbenchDialog, _super);
 
     function WorkbenchDialog(game, opts) {
-      var crDiv, craftCont, resultCont, _ref1, _ref2, _ref3,
+      var crDiv, craftCont, resultCont, _ref1,
         _this = this;
       this.game = game;
       if (opts == null) {
@@ -31,20 +31,9 @@
           throw 'voxel-workbench requires "playerInventory" set to inventory instance';
         }
       })();
-      this.registry = (function() {
-        if ((_ref2 = opts.registry) != null) {
-          return _ref2;
-        } else {
-          throw 'voxel-workbench requires "registry" set to voxel-registry instance';
-        }
-      })();
-      this.getTexture = (_ref3 = opts.getTexture) != null ? _ref3 : function(itemPile) {
-        return _this.registry.getItemPileTexture(itemPile);
-      };
       this.playerIW = new InventoryWindow({
         width: 10,
-        inventory: this.playerInventory,
-        getTexture: this.getTexture
+        inventory: this.playerInventory
       });
       this.craftInventory = new Inventory(3, 3);
       this.craftInventory.on('changed', function() {
@@ -52,13 +41,11 @@
       });
       this.craftIW = new InventoryWindow({
         width: 3,
-        inventory: this.craftInventory,
-        getTexture: this.getTexture
+        inventory: this.craftInventory
       });
       this.resultInventory = new Inventory(1);
       this.resultIW = new InventoryWindow({
         inventory: this.resultInventory,
-        getTexture: this.getTexture,
         allowDrop: false
       });
       this.resultIW.on('pickup', function() {
