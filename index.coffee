@@ -6,22 +6,44 @@ InventoryWindow = require 'inventory-window'
 ItemPile = require 'itempile'
 {Recipe, AmorphousRecipe, PositionalRecipe, CraftingThesaurus, RecipeLocator} = require 'craftingrecipes'
 
-class WorkbenchDialog extends Modal
+class Workbench
   constructor: (@game, opts) ->
     opts ?= {}
- 
-    # TODO: refactor with voxel-inventory-dialog
+
     @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
     @registry = opts.registry ? throw 'voxel-workbench requires "registry" set to voxel-registry instance'
 
     opts.registerBlock ?= true
     opts.registerRecipe ?= true
+    
+    @workbenchDialog = new WorkbenchDialog(game, opts)
 
-    if opts.registerBlock
-      @registry.registerBlock 'workbench', {texture: ['crafting_table_top', 'planks_oak', 'crafting_table_side']}
-    if opts.registerRecipe
+    @opts = opts
+    @enable()
+
+  enable: () ->
+    if @opts.registerBlock
+      @registry.registerBlock 'workbench', {texture: ['crafting_table_top', 'planks_oak', 'crafting_table_side'], onInteract: () =>
+         @workbenchDialog.open()
+         true
+       }
+
+    if @opts.registerRecipe
+      # TODO: @registry.recipes?
       @registry.recipes.register new AmorphousRecipe(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1))
 
+  disable: () ->
+    # TODO
+
+
+class WorkbenchDialog extends Modal
+  constructor: (@game, opts) ->
+    opts ?= {}
+ 
+    @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
+    @registry = opts.registry ? throw 'voxel-workbench requires "registry" set to voxel-registry instance'
+
+    # TODO: refactor with voxel-inventory-dialog
     @playerIW = new InventoryWindow {
       width: 10
       inventory: @playerInventory
@@ -87,7 +109,6 @@ class WorkbenchDialog extends Modal
     @craftInventory.changed()
 
 module.exports = (game, opts) ->
-  return new WorkbenchDialog(game, opts)
-# TODO: register block, interact, etc. self-contained
+  return new Workbench(game, opts)
 
 
