@@ -11,8 +11,8 @@ class Workbench
     opts ?= {}
 
     @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
-    @registry = game.plugins?.all.registry ? throw 'voxel-workbench requires "voxel-registry" plugin'
-    @recipes = game.plugins?.all['!craftingrecipes'] ? throw 'voxel-workbench requires "craftingrecipes" plugin'
+    @registry = game.plugins?.get('voxel-registry') ? throw 'voxel-workbench requires "voxel-registry" plugin'
+    @recipes = game.plugins?.get('craftingrecipes') ? throw 'voxel-workbench requires "craftingrecipes" plugin'
 
     opts.registerBlock ?= true
     opts.registerRecipe ?= true
@@ -107,4 +107,4 @@ module.exports = (game, opts) ->
   return new Workbench(game, opts)
 
 module.exports.pluginInfo =
-  loadAfter: ['registry', '!craftingrecipes']
+  loadAfter: ['voxel-registry', 'craftingrecipes']

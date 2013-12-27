@@ -30,7 +30,7 @@
       })();
       this.registry = (function() {
         var _ref3;
-        if ((_ref2 = (_ref3 = game.plugins) != null ? _ref3.all.registry : void 0) != null) {
+        if ((_ref2 = (_ref3 = game.plugins) != null ? _ref3.get('voxel-registry') : void 0) != null) {
           return _ref2;
         } else {
           throw 'voxel-workbench requires "voxel-registry" plugin';
@@ -38,7 +38,7 @@
       })();
       this.recipes = (function() {
         var _ref4;
-        if ((_ref3 = (_ref4 = game.plugins) != null ? _ref4.all['!craftingrecipes'] : void 0) != null) {
+        if ((_ref3 = (_ref4 = game.plugins) != null ? _ref4.get('craftingrecipes') : void 0) != null) {
           return _ref3;
         } else {
           throw 'voxel-workbench requires "craftingrecipes" plugin';
@@ -159,7 +159,7 @@
   };
 
   module.exports.pluginInfo = {
-    loadAfter: ['registry', '!craftingrecipes']
+    loadAfter: ['voxel-registry', 'craftingrecipes']
   };
 
 }).call(this);
