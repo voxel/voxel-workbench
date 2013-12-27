@@ -11,7 +11,7 @@ class Workbench
     opts ?= {}
 
     @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
-    @registry = opts.registry ? throw 'voxel-workbench requires "registry" set to voxel-registry instance'
+    @registry = game.plugins?.all.registry ? throw 'voxel-workbench requires "voxel-registry" plugin'
 
     opts.registerBlock ?= true
     opts.registerRecipe ?= true
@@ -111,4 +111,5 @@ class WorkbenchDialog extends Modal
 module.exports = (game, opts) ->
   return new Workbench(game, opts)
 
-
+module.exports.pluginInfo =
+  loadAfter: ['registry']

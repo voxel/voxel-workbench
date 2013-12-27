@@ -29,10 +29,11 @@
         }
       })();
       this.registry = (function() {
-        if ((_ref2 = opts.registry) != null) {
+        var _ref3;
+        if ((_ref2 = (_ref3 = game.plugins) != null ? _ref3.all.registry : void 0) != null) {
           return _ref2;
         } else {
-          throw 'voxel-workbench requires "registry" set to voxel-registry instance';
+          throw 'voxel-workbench requires "voxel-registry" plugin';
         }
       })();
       if (opts.registerBlock == null) {
@@ -161,6 +162,10 @@
 
   module.exports = function(game, opts) {
     return new Workbench(game, opts);
+  };
+
+  module.exports.pluginInfo = {
+    loadAfter: ['registry']
   };
 
 }).call(this);
