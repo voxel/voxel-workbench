@@ -4,7 +4,7 @@ Modal = require 'voxel-modal'
 Inventory = require 'inventory'
 InventoryWindow = require 'inventory-window'
 ItemPile = require 'itempile'
-{Recipe, AmorphousRecipe, PositionalRecipe, CraftingThesaurus, RecipeLocator} = require 'craftingrecipes'
+{Recipe, AmorphousRecipe, PositionalRecipe, CraftingThesaurus, RecipeList} = require 'craftingrecipes'
 
 class Workbench
   constructor: (@game, opts) ->
@@ -12,11 +12,12 @@ class Workbench
 
     @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
     @registry = game.plugins?.all.registry ? throw 'voxel-workbench requires "voxel-registry" plugin'
+    @recipes = game.plugins?.all['!craftingrecipes'] ? throw 'voxel-workbench requires "craftingrecipes" plugin'
 
     opts.registerBlock ?= true
     opts.registerRecipe ?= true
     
-    @workbenchDialog = new WorkbenchDialog(game, opts)
+    @workbenchDialog = new WorkbenchDialog(game, @playerInventory, @registry, @recipes)
 
     @opts = opts
     @enable()
@@ -29,20 +30,14 @@ class Workbench
        }
 
     if @opts.registerRecipe
-      # TODO: @registry.recipes?
-      @registry.recipes.register new AmorphousRecipe(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1))
+      @recipes.register new AmorphousRecipe(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1))
 
   disable: () ->
     # TODO
 
 
 class WorkbenchDialog extends Modal
-  constructor: (@game, opts) ->
-    opts ?= {}
- 
-    @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
-    @registry = opts.registry ? throw 'voxel-workbench requires "registry" set to voxel-registry instance'
-
+  constructor: (@game, @playerInventory, @registry, @recipes) ->
     # TODO: refactor with voxel-inventory-dialog
     @playerIW = new InventoryWindow {
       width: 10
@@ -96,13 +91,13 @@ class WorkbenchDialog extends Modal
 
   # changed crafting grid, so update recipe output
   updateCraftingRecipe: () ->
-    recipe = RecipeLocator.find(@craftInventory)
+    recipe = @recipes.find(@craftInventory)
     console.log 'found recipe',recipe
     @resultInventory.set 0, recipe?.computeOutput(@craftInventory)
 
   # picked up crafting recipe output, so consume crafting grid ingredients
   tookCraftingOutput: () ->
-    recipe = RecipeLocator.find(@craftInventory)
+    recipe = @recipes.find(@craftInventory)
     return if not recipe?
 
     recipe.craft(@craftInventory)
@@ -112,4 +107,4 @@ module.exports = (game, opts) ->
   return new Workbench(game, opts)
 
 module.exports.pluginInfo =
-  loadAfter: ['registry']
+  loadAfter: ['registry', '!craftingrecipes']
