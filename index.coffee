@@ -93,6 +93,18 @@ class WorkbenchDialog extends ModalDialog
     recipe.craft(@craftInventory)
     @craftInventory.changed()
 
+  close: () ->
+    # exiting workbench returns in-progress crafting ingredients to player
+    # TODO: inventory transfer() method
+    for i in [0...@craftInventory.size()]
+      if @craftInventory.get(i)
+        excess = @playerInventory.give @craftInventory.get(i)
+        #if excess # too bad, player loses if can't fit
+
+      @craftInventory.set i, undefined
+
+    super()
+
 module.exports = (game, opts) ->
   return new Workbench(game, opts)
 

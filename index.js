@@ -142,6 +142,17 @@
       return this.craftInventory.changed();
     };
 
+    WorkbenchDialog.prototype.close = function() {
+      var excess, i, _i, _ref1;
+      for (i = _i = 0, _ref1 = this.craftInventory.size(); 0 <= _ref1 ? _i < _ref1 : _i > _ref1; i = 0 <= _ref1 ? ++_i : --_i) {
+        if (this.craftInventory.get(i)) {
+          excess = this.playerInventory.give(this.craftInventory.get(i));
+        }
+        this.craftInventory.set(i, void 0);
+      }
+      return WorkbenchDialog.__super__.close.call(this);
+    };
+
     return WorkbenchDialog;
 
   })(ModalDialog);
