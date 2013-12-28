@@ -6,11 +6,17 @@ InventoryWindow = require 'inventory-window'
 ItemPile = require 'itempile'
 {Recipe, AmorphousRecipe, PositionalRecipe, CraftingThesaurus, RecipeList} = require 'craftingrecipes'
 
+module.exports = (game, opts) ->
+  return new Workbench(game, opts)
+
+module.exports.pluginInfo =
+  loadAfter: ['voxel-registry', 'craftingrecipes', 'voxel-carry']
+
 class Workbench
   constructor: (@game, opts) ->
     opts ?= {}
 
-    @playerInventory = opts.playerInventory ? throw 'voxel-workbench requires "playerInventory" set to inventory instance'
+    @playerInventory = game.plugins?.get('voxel-carry')?.inventory ? opts.playerInventory ? throw 'voxel-workbench requires "voxel-carry" plugin or "playerInventory" set to inventory instance'
     @registry = game.plugins?.get('voxel-registry') ? throw 'voxel-workbench requires "voxel-registry" plugin'
     @recipes = game.plugins?.get('craftingrecipes') ? throw 'voxel-workbench requires "craftingrecipes" plugin'
 
@@ -105,8 +111,4 @@ class WorkbenchDialog extends ModalDialog
 
     super()
 
-module.exports = (game, opts) ->
-  return new Workbench(game, opts)
 
-module.exports.pluginInfo =
-  loadAfter: ['voxel-registry', 'craftingrecipes']

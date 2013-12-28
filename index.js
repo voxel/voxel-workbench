@@ -14,6 +14,14 @@
 
   _ref = require('craftingrecipes'), Recipe = _ref.Recipe, AmorphousRecipe = _ref.AmorphousRecipe, PositionalRecipe = _ref.PositionalRecipe, CraftingThesaurus = _ref.CraftingThesaurus, RecipeList = _ref.RecipeList;
 
+  module.exports = function(game, opts) {
+    return new Workbench(game, opts);
+  };
+
+  module.exports.pluginInfo = {
+    loadAfter: ['voxel-registry', 'craftingrecipes', 'voxel-carry']
+  };
+
   Workbench = (function() {
     function Workbench(game, opts) {
       var _ref1, _ref2, _ref3;
@@ -22,10 +30,11 @@
         opts = {};
       }
       this.playerInventory = (function() {
-        if ((_ref1 = opts.playerInventory) != null) {
+        var _ref2, _ref3, _ref4;
+        if ((_ref1 = (_ref2 = (_ref3 = game.plugins) != null ? (_ref4 = _ref3.get('voxel-carry')) != null ? _ref4.inventory : void 0 : void 0) != null ? _ref2 : opts.playerInventory) != null) {
           return _ref1;
         } else {
-          throw 'voxel-workbench requires "playerInventory" set to inventory instance';
+          throw 'voxel-workbench requires "voxel-carry" plugin or "playerInventory" set to inventory instance';
         }
       })();
       this.registry = (function() {
@@ -156,13 +165,5 @@
     return WorkbenchDialog;
 
   })(ModalDialog);
-
-  module.exports = function(game, opts) {
-    return new Workbench(game, opts);
-  };
-
-  module.exports.pluginInfo = {
-    loadAfter: ['voxel-registry', 'craftingrecipes']
-  };
 
 }).call(this);
