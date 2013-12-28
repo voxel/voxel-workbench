@@ -1,6 +1,6 @@
 # vim: set shiftwidth=2 tabstop=2 softtabstop=2 expandtab:
 
-Modal = require 'voxel-modal'
+ModalDialog = require 'voxel-modal-dialog'
 Inventory = require 'inventory'
 InventoryWindow = require 'inventory-window'
 ItemPile = require 'itempile'
@@ -36,7 +36,7 @@ class Workbench
     # TODO
 
 
-class WorkbenchDialog extends Modal
+class WorkbenchDialog extends ModalDialog
   constructor: (@game, @playerInventory, @registry, @recipes) ->
     # TODO: refactor with voxel-inventory-dialog
     @playerIW = new InventoryWindow {
@@ -52,17 +52,6 @@ class WorkbenchDialog extends Modal
     @resultInventory = new Inventory(1)
     @resultIW = new InventoryWindow {inventory:@resultInventory, allowDrop:false}
     @resultIW.on 'pickup', () => @tookCraftingOutput()
-
-    # the overall dialog
-    @dialog = document.createElement('div')
-    @dialog.style.border = '6px outset gray'
-    @dialog.style.visibility = 'hidden'
-    @dialog.style.position = 'absolute'
-    @dialog.style.top = '20%'
-    @dialog.style.left = '30%'
-    @dialog.style.zIndex = 1
-    @dialog.style.backgroundImage = 'linear-gradient(rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%)'
-    document.body.appendChild(@dialog)
 
     # crafting + result div, upper
     crDiv = document.createElement('div')
@@ -80,12 +69,13 @@ class WorkbenchDialog extends Modal
     crDiv.appendChild(craftCont)
     crDiv.appendChild(resultCont)
 
-    @dialog.appendChild(crDiv)
-    @dialog.appendChild(document.createElement('br')) # TODO: better positioning
+    contents = []
+    contents.push crDiv
+    contents.push document.createElement('br') # TODO: better positioning
     # player inventory at bottom
-    @dialog.appendChild(@playerIW.createContainer())
+    contents.push @playerIW.createContainer()
 
-    super game, {element: @dialog}
+    super game, {contents: contents}
 
   # TODO: refactor again from voxel-inventory-dialog's crafting
 
