@@ -106,12 +106,14 @@
       });
       this.craftIW = new InventoryWindow({
         width: 3,
-        inventory: this.craftInventory
+        inventory: this.craftInventory,
+        linkedInventory: this.playerInventory
       });
       this.resultInventory = new Inventory(1);
       this.resultIW = new InventoryWindow({
         inventory: this.resultInventory,
-        allowDrop: false
+        allowDrop: false,
+        linkedInventory: this.playerInventory
       });
       this.resultIW.on('pickup', function() {
         return _this.tookCraftingOutput();
