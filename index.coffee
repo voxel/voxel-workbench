@@ -45,18 +45,15 @@ class Workbench
 class WorkbenchDialog extends ModalDialog
   constructor: (@game, @playerInventory, @registry, @recipes) ->
     # TODO: refactor with voxel-inventory-dialog
-    @playerIW = new InventoryWindow {
-      width: 10
-      inventory: @playerInventory
-      }
+    @playerIW = new InventoryWindow {width: 10, registry:@registry, inventory:@playerInventory}
 
     # TODO: clear these inventories on close, or store in per-block metadata
     @craftInventory = new Inventory(3, 3)
     @craftInventory.on 'changed', () => @updateCraftingRecipe()
-    @craftIW = new InventoryWindow {width:3, inventory:@craftInventory, linkedInventory:@playerInventory}
+    @craftIW = new InventoryWindow {width:3, registry:@registry, inventory:@craftInventory, linkedInventory:@playerInventory}
 
     @resultInventory = new Inventory(1)
-    @resultIW = new InventoryWindow {inventory:@resultInventory, allowDrop:false, linkedInventory:@playerInventory}
+    @resultIW = new InventoryWindow {inventory:@resultInventory, registry:@registry, allowDrop:false, linkedInventory:@playerInventory}
     @resultIW.on 'pickup', () => @tookCraftingOutput()
 
     # crafting + result div, upper

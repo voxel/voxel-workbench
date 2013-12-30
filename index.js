@@ -98,6 +98,7 @@
       this.recipes = recipes;
       this.playerIW = new InventoryWindow({
         width: 10,
+        registry: this.registry,
         inventory: this.playerInventory
       });
       this.craftInventory = new Inventory(3, 3);
@@ -106,12 +107,14 @@
       });
       this.craftIW = new InventoryWindow({
         width: 3,
+        registry: this.registry,
         inventory: this.craftInventory,
         linkedInventory: this.playerInventory
       });
       this.resultInventory = new Inventory(1);
       this.resultIW = new InventoryWindow({
         inventory: this.resultInventory,
+        registry: this.registry,
         allowDrop: false,
         linkedInventory: this.playerInventory
       });
