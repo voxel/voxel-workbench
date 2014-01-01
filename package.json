@@ -1,20 +1,30 @@
 {
-    "name": "voxel-workbench",
-    "description": "crafting workbench",
-    "version": "0.0.1",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:deathcap/voxel-workbench.git"
-    },
-    "dependencies": {
-        "voxel-modal-dialog": "git://github.com/deathcap/voxel-modal-dialog.git",
-        "inventory": "git://github.com/deathcap/inventory.git",
-        "itempile": "git://github.com/deathcap/itempile.git",
-        "inventory-window": "git://github.com/deathcap/inventory-window.git",
-        "craftingrecipes": "git://github.com/deathcap/craftingrecipes.git",
-        "ever": "0.0.3"
-    },
-    "peerDependencies": {
-        "voxel-engine": ">=0.19.0"
-    }
+  "name": "voxel-workbench",
+  "description": "crafting workbench",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:deathcap/voxel-workbench.git"
+  },
+  "keywords": [
+    "voxel",
+    "workbench",
+    "crafting",
+    "recipes",
+    "block"
+  ],
+  "dependencies": {
+    "voxel-modal-dialog": "~0.1.0",
+    "inventory": "~0.1.0",
+    "itempile": "~0.1.1",
+    "inventory-window": "~0.1.0",
+    "craftingrecipes": "~0.1.0",
+    "ever": "0.0.3"
+  },
+  "peerDependencies": {
+    "voxel-plugins": ">=0.1.0",
+    "voxel-carry": ">=0.1.0",
+    "voxel-registry": ">=0.1.0"
+  },
+  "license": "MIT"
 }
