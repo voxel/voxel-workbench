@@ -59,7 +59,9 @@
       if (opts.registerRecipe == null) {
         opts.registerRecipe = true;
       }
-      this.workbenchDialog = new WorkbenchDialog(game, this.playerInventory, this.registry, this.recipes);
+      if (this.game.isClient) {
+        this.workbenchDialog = new WorkbenchDialog(game, this.playerInventory, this.registry, this.recipes);
+      }
       this.opts = opts;
       this.enable();
     }

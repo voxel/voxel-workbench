@@ -22,8 +22,9 @@ class Workbench
 
     opts.registerBlock ?= true
     opts.registerRecipe ?= true
-    
-    @workbenchDialog = new WorkbenchDialog(game, @playerInventory, @registry, @recipes)
+   
+    if @game.isClient
+      @workbenchDialog = new WorkbenchDialog(game, @playerInventory, @registry, @recipes)
 
     @opts = opts
     @enable()
@@ -31,9 +32,10 @@ class Workbench
   enable: () ->
     if @opts.registerBlock
       @registry.registerBlock 'workbench', {texture: ['crafting_table_top', 'planks_oak', 'crafting_table_side'], onInteract: () =>
-         @workbenchDialog.open()
-         true
-       }
+        # TODO: server-side
+        @workbenchDialog.open()
+        true
+      }
 
     if @opts.registerRecipe
       @recipes.register new AmorphousRecipe(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1))
