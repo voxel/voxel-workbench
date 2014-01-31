@@ -4,13 +4,12 @@ ModalDialog = require 'voxel-modal-dialog'
 Inventory = require 'inventory'
 InventoryWindow = require 'inventory-window'
 ItemPile = require 'itempile'
-{Recipe, AmorphousRecipe, PositionalRecipe, CraftingThesaurus, RecipeList} = require 'craftingrecipes'
 
 module.exports = (game, opts) ->
   return new Workbench(game, opts)
 
 module.exports.pluginInfo =
-  loadAfter: ['voxel-registry', 'craftingrecipes', 'voxel-carry']
+  loadAfter: ['voxel-registry', 'voxel-recipes', 'voxel-carry']
 
 class Workbench
   constructor: (@game, opts) ->
@@ -18,7 +17,7 @@ class Workbench
 
     @playerInventory = game.plugins?.get('voxel-carry')?.inventory ? opts.playerInventory ? throw 'voxel-workbench requires "voxel-carry" plugin or "playerInventory" set to inventory instance'
     @registry = game.plugins?.get('voxel-registry') ? throw 'voxel-workbench requires "voxel-registry" plugin'
-    @recipes = game.plugins?.get('craftingrecipes') ? throw 'voxel-workbench requires "craftingrecipes" plugin'
+    @recipes = game.plugins?.get('voxel-recipes') ? throw 'voxel-workbench requires "voxel-recipes" plugin'
 
     opts.registerBlock ?= true
     opts.registerRecipe ?= true
@@ -38,7 +37,7 @@ class Workbench
       }
 
     if @opts.registerRecipe
-      @recipes.register new AmorphousRecipe(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1))
+      @recipes.registerAmorphous(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1))
 
   disable: () ->
     # TODO
