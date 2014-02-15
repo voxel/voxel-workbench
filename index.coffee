@@ -15,9 +15,9 @@ class Workbench
   constructor: (@game, opts) ->
     opts ?= {}
 
-    @playerInventory = game.plugins?.get('voxel-carry')?.inventory ? opts.playerInventory ? throw 'voxel-workbench requires "voxel-carry" plugin or "playerInventory" set to inventory instance'
-    @registry = game.plugins?.get('voxel-registry') ? throw 'voxel-workbench requires "voxel-registry" plugin'
-    @recipes = game.plugins?.get('voxel-recipes') ? throw 'voxel-workbench requires "voxel-recipes" plugin'
+    @playerInventory = game.plugins?.get('voxel-carry')?.inventory ? opts.playerInventory ? throw new Error('voxel-workbench requires "voxel-carry" plugin or "playerInventory" set to inventory instance')
+    @registry = game.plugins?.get('voxel-registry') ? throw new Error('voxel-workbench requires "voxel-registry" plugin')
+    @recipes = game.plugins?.get('voxel-recipes') ? throw new Error('voxel-workbench requires "voxel-recipes" plugin')
 
     opts.registerBlock ?= true
     opts.registerRecipe ?= true

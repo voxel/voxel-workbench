@@ -32,7 +32,7 @@
         if ((_ref = (_ref1 = (_ref2 = game.plugins) != null ? (_ref3 = _ref2.get('voxel-carry')) != null ? _ref3.inventory : void 0 : void 0) != null ? _ref1 : opts.playerInventory) != null) {
           return _ref;
         } else {
-          throw 'voxel-workbench requires "voxel-carry" plugin or "playerInventory" set to inventory instance';
+          throw new Error('voxel-workbench requires "voxel-carry" plugin or "playerInventory" set to inventory instance');
         }
       })();
       this.registry = (function() {
@@ -40,7 +40,7 @@
         if ((_ref1 = (_ref2 = game.plugins) != null ? _ref2.get('voxel-registry') : void 0) != null) {
           return _ref1;
         } else {
-          throw 'voxel-workbench requires "voxel-registry" plugin';
+          throw new Error('voxel-workbench requires "voxel-registry" plugin');
         }
       })();
       this.recipes = (function() {
@@ -48,7 +48,7 @@
         if ((_ref2 = (_ref3 = game.plugins) != null ? _ref3.get('voxel-recipes') : void 0) != null) {
           return _ref2;
         } else {
-          throw 'voxel-workbench requires "voxel-recipes" plugin';
+          throw new Error('voxel-workbench requires "voxel-recipes" plugin');
         }
       })();
       if (opts.registerBlock == null) {
