@@ -3,7 +3,6 @@
 ModalDialog = require 'voxel-modal-dialog'
 Inventory = require 'inventory'
 InventoryWindow = require 'inventory-window'
-ItemPile = require 'itempile'
 
 module.exports = (game, opts) ->
   return new Workbench(game, opts)
@@ -37,7 +36,7 @@ class Workbench
       }
 
     if @opts.registerRecipe
-      @recipes.registerAmorphous(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], new ItemPile('workbench', 1))
+      @recipes.registerAmorphous(['wood.plank', 'wood.plank', 'wood.plank', 'wood.plank'], ['workbench'])
 
   disable: () ->
     # TODO
