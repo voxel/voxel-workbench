@@ -55,19 +55,21 @@ class WorkbenchDialog extends InventoryDialog
 
     # crafting + result div, upper
     crDiv = document.createElement('div')
-    crDiv.style.marginLeft = '30%'
-    #crDiv.style.marginLeft = 'auto' # TODO: fix centering
-    #crDiv.style.marginRight = 'auto'
-    crDiv.style.marginBottom = '10px'
+    crDiv.style.display = 'flex'
+    crDiv.style.flexFlow = 'row'
+    crDiv.style.justifyContent = 'center'
    
     craftCont = @craftIW.createContainer()
 
-    resultCont = @resultIW.createContainer()
-    resultCont.style.marginLeft = '30px'
-    resultCont.style.marginTop = '15%'
+    craftContOuter = document.createElement('div')
+    craftContOuter.appendChild craftCont
 
-    crDiv.appendChild(craftCont)
-    crDiv.appendChild(resultCont)
+    resultCont = @resultIW.createContainer()
+    resultCont.style.alignSelf = 'center'
+    resultCont.style.marginLeft = '30px'  # separate from crafting grid
+
+    crDiv.appendChild craftContOuter
+    crDiv.appendChild resultCont
 
 
     super game,

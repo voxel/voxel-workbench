@@ -89,7 +89,7 @@
     __extends(WorkbenchDialog, _super);
 
     function WorkbenchDialog(game, playerInventory, registry, recipes) {
-      var crDiv, craftCont, resultCont;
+      var crDiv, craftCont, craftContOuter, resultCont;
       this.game = game;
       this.playerInventory = playerInventory;
       this.registry = registry;
@@ -119,13 +119,16 @@
         };
       })(this));
       crDiv = document.createElement('div');
-      crDiv.style.marginLeft = '30%';
-      crDiv.style.marginBottom = '10px';
+      crDiv.style.display = 'flex';
+      crDiv.style.flexFlow = 'row';
+      crDiv.style.justifyContent = 'center';
       craftCont = this.craftIW.createContainer();
+      craftContOuter = document.createElement('div');
+      craftContOuter.appendChild(craftCont);
       resultCont = this.resultIW.createContainer();
+      resultCont.style.alignSelf = 'center';
       resultCont.style.marginLeft = '30px';
-      resultCont.style.marginTop = '15%';
-      crDiv.appendChild(craftCont);
+      crDiv.appendChild(craftContOuter);
       crDiv.appendChild(resultCont);
       WorkbenchDialog.__super__.constructor.call(this, game, {
         upper: [crDiv]
