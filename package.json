@@ -16,7 +16,7 @@
   "dependencies": {
     "voxel-inventory-dialog": "~0.3.1",
     "inventory": "~0.1.0",
-    "inventory-window": "~0.2.0",
+    "inventory-window": "^0.3.0",
     "ever": "0.0.3"
   },
   "license": "MIT"
