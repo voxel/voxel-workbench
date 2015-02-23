@@ -1,7 +1,7 @@
 {
   "name": "voxel-workbench",
   "description": "crafting workbench",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "workbench.coffee",
   "repository": {
     "type": "git",
