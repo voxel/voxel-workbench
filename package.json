@@ -16,8 +16,8 @@
     "block"
   ],
   "dependencies": {
-    "voxel-inventory-dialog": "^1.0.0",
-    "inventory": "^1.0.0",
+    "voxel-inventory-dialog": "^2.0.1",
+    "inventory": "^2.0.0",
     "inventory-window": "^1.0.0",
     "ever": "0.0.3"
   },
