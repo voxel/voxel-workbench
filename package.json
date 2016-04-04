@@ -2,7 +2,7 @@
   "name": "voxel-workbench",
   "description": "crafting workbench",
   "version": "0.2.2",
-  "main": "workbench.coffee",
+  "main": "workbench.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:deathcap/voxel-workbench.git"
@@ -16,15 +16,10 @@
     "block"
   ],
   "dependencies": {
-    "voxel-inventory-dialog": "^1.0.0",
-    "inventory": "^1.0.0",
-    "inventory-window": "^1.0.0",
+    "voxel-inventory-dialog": "^3.0.1",
+    "inventory": "^2.0.0",
+    "inventory-window": "^2.0.2",
     "ever": "0.0.3"
-  },
-  "browserify": {
-    "transform": [
-      "coffeeify"
-    ]
   },
   "license": "MIT"
 }
