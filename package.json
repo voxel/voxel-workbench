@@ -2,7 +2,7 @@
   "name": "voxel-workbench",
   "description": "crafting workbench",
   "version": "0.2.2",
-  "main": "workbench.coffee",
+  "main": "workbench.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:deathcap/voxel-workbench.git"
